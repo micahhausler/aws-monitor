@@ -3,6 +3,9 @@
 # C extensions
 *.so
 
+# VI files
+*.swp
+
 env/
 venv/
 
