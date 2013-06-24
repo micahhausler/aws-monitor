@@ -3,6 +3,9 @@
 # C extensions
 *.so
 
+env/
+venv/
+
 # Packages
 *.egg
 *.egg-info
@@ -28,8 +31,3 @@ nosetests.xml
 
 # Translations
 *.mo
-
-# Mr Developer
-.mr.developer.cfg
-.project
-.pydevproject
