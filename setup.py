@@ -36,5 +36,5 @@ setup(
         "Topic :: System :: Monitoring",
         "License :: OSI Approved :: Closed",
     ],
-    entry_points={'console_scripts': ['aws_monitor_push=monitor.push:main']}
+    entry_points={'console_scripts': ['aws_monitor=monitor.push:main']}
 )
