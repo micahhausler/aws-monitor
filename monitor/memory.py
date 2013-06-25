@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-from psutil import phymem_usage, virtmem_usage 
+from psutil import phymem_usage, virtmem_usage
+
 
 def get_physmem():
     usage = {}

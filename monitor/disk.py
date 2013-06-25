@@ -12,5 +12,4 @@ def disk_stats():
         usage[mp]['total'] = disk_usage(mp).total
         usage[mp]['used'] = disk_usage(mp).used
         usage[mp]['free'] = disk_usage(mp).free
-
     return usage
