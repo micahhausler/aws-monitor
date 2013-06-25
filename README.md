@@ -17,7 +17,7 @@ $ sudo python setup.py install
 
 Usage
 ------
-aws_monitor sends custom cloudwatch metrics such as disk and memory statistics to Cloudwatch
+aws_monitor sends custom metrics such as disk and memory statistics to Cloudwatch
 
 
 [envdir](http://cr.yp.to/daemontools/envdir.html) is part of the [daemontools](http://cr.yp.to/daemontools) package, and is great for setting private environment variables.
