@@ -16,7 +16,7 @@ import boto
 
 logging.basicConfig(
     filename="/var/log/aws-monitor.log",
-    format='%(name)-12s %(levelname)-8s %(message)s')
+    format='%(asctime)-8s %(name)-12s %(levelname)-8s %(message)s')
 logger = logging.getLogger('aws-monitor')
 
 
@@ -149,7 +149,7 @@ def main(argv=None):
         aws_access_key_id = args.aws_access_key_id
 
     conn = boto.connect_cloudwatch(
-        aws_acces_key_id=aws_access_key_id,
+        aws_access_key_id=aws_access_key_id,
         aws_secret_access_key=secret_key)
 
     instance_id = get_ec2_instance_id(logger)
