@@ -15,9 +15,9 @@ import boto
 
 
 logging.basicConfig(
-    filename="/var/log/aws_monitor.log",
+    filename="/var/log/aws-monitor.log",
     format='%(name)-12s %(levelname)-8s %(message)s')
-logger = logging.getLogger('aws_monitor')
+logger = logging.getLogger('aws-monitor')
 
 
 def send_disk_stats(connection, data, instance_id):
@@ -49,6 +49,7 @@ def send_disk_stats(connection, data, instance_id):
             dimensions={
                 "disk": disk,
                 "InstanceID": instance_id})
+    logger.debug(msg="Sent disk stats successfully")
     return True
 
 
@@ -82,6 +83,7 @@ def send_mem_stats(connection, data, instance_id):
             name=stat_keys,
             value=stat_values,
             dimensions={"InstanceID": instance_id})
+    logger.debug(msg="Sent mem stats successfully")
     return True
 
 
@@ -101,7 +103,7 @@ def main(argv=None):
         'precedence.')
 
     parser.add_argument(
-        '-l', '--log-level',
+        '-l', '--loglevel',
         help='The level of log verbosity. Can also be set as the '
         'environment variable LOGLEVEL. Available levels are '
         'DEBUG | INFO | ERROR | OFF. The default is ERROR')
@@ -109,6 +111,24 @@ def main(argv=None):
    #TODO add subparsers for what moduels to monitor (memory, disk, etc)
 
     args = parser.parse_args()
+
+    levels = ['DEBUG', 'INFO', 'ERROR', 'OFF']
+    if args.loglevel is None:
+        level = os.getenv("LOGLEVEL")
+        if level is None:
+            logger.debug(msg="LOGLEVEL is not set, defaulting to INFO")
+            level = "INFO"
+    else:
+        level = args.loglevel
+
+    if level in levels:
+        logging.root.setLevel(level)
+    else:
+        logger.error(
+            msg="Log level '{}' is not a valid level".format(level),
+            hint="Please ensure LOGLEVEL is one of {}".format(", ".join(levels)))
+        sys.exit(1)
+
     secret_key = os.getenv('AWS_SECRET_ACCESS_KEY')
 
     if secret_key is None:
@@ -148,6 +168,7 @@ def main(argv=None):
     send_mem_stats(conn, phys_mem, instance_id)
     send_mem_stats(conn, virt_mem, instance_id)
 
+    logger.debug(msg="exited successfully")
     return 0
 
 
