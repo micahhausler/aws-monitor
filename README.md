@@ -56,6 +56,29 @@ Log
 A logfile is automatically created at /var/log/aws-monitor.log
 
 
+Cloudwatch
+----------
+Included is a suggested policy for an IAM user/group to have access to post to cloudwatch:
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "cloudwatch:PutMetricData"
+      ],
+      "Sid": "Stmt1372278673000",
+      "Resource": [
+        "*"
+      ],
+      "Effect": "Allow"
+    }
+  ]
+}
+```
+
+
 TODO
 ---
 * Add support for different EC2 Regions
