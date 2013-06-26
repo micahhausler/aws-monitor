@@ -108,8 +108,6 @@ def main(argv=None):
         'environment variable LOGLEVEL. Available levels are '
         'DEBUG | INFO | ERROR | OFF. The default is ERROR')
 
-   #TODO add subparsers for what moduels to monitor (memory, disk, etc)
-
     args = parser.parse_args()
 
     levels = ['DEBUG', 'INFO', 'ERROR', 'OFF']

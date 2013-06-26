@@ -54,3 +54,9 @@ Log
 ---
 
 A logfile is automatically created at /var/log/aws-monitor.log
+
+
+TODO
+---
+* Add support for different EC2 Regions
+* Add multiple modules, cmd line options for them
