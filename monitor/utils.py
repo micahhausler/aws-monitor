@@ -1,28 +1,33 @@
 #!/usr/bin/env python
 
-import boto
 import requests
-from requests.exceptions import ConnectionError
+from requests.exceptions import ConnectionError, Timeout
 
 
-def get_ec2_instance_id():
+def get_ec2_instance_id(logger):
     try:
         response = requests.get(
-            "http://169.254.169.254/latest/meta-data/instance-id/")
+            "http://169.254.169.254/latest/meta-data/instance-id/", timeout=10)
         return response.text
-    except ConnectionError, e:
-        print e
+    except (ConnectionError, Timeout), e:
+        logger.info(
+            msg=e,
+            hint="Could not get ec2 InstanceID, using hostname")
         import os
         return os.uname()[1]
 
 
-def setup_cw_connection(key_id=None, secret_key=None, region="us-east-1"):
-    """
-    Returns an ec2 connection
+def bytes_to_best_unit(byte):
+    units = ['Bytes', 'Kilobytes', 'Megabytes', 'Gigabytes', 'Terabytes']
+    metric = byte
+    counter = 0
+    while metric > 1024 and counter < 4:
+        metric = metric / 1024
+        counter += 1
+    return (metric, units[counter])
 
-    Either pass in a key_id and secret_key, or it picks up the OS variables
-    AWS_ACCESS_KEY_ID
-    AWS_SECRET_ACCESS_KEY
-    """
-    cw = boto.connect_cloudwatch()
-    return cw
+
+def bytes_to_unit(byte, unit):
+    units = ['Bytes', 'Kilobytes', 'Megabytes', 'Gigabytes', 'Terabytes']
+    if unit not in units:
+        return False
