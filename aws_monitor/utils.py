@@ -10,9 +10,8 @@ def get_ec2_instance_id(logger):
             "http://169.254.169.254/latest/meta-data/instance-id/", timeout=10)
         return response.text
     except (ConnectionError, Timeout), e:
-        logger.info(
-            msg=e,
-            hint="Could not get ec2 InstanceID, using hostname")
+        logger.error(msg=e.message)
+        logger.error(msg="Could not get ec2 InstanceID, using hostname")
         import os
         return os.uname()[1]
 
