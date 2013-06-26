@@ -19,7 +19,8 @@ setup(
     version="0.0.1",
     author="Micah Hausler",
     author_email="micah.hausler@akimbo.io",
-    description=("""An Amazon Web services system library that is used at akimbo LLC"""),
+    description=(
+        "An Amazon Web services system library that is used at Akimbo LLC"),
     license="Closed",
     keywords="AWS",
     url="http://getfireplug.com",
