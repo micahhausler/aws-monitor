@@ -36,9 +36,9 @@ $ chown -R root:TRUSTEDGROUP /etc/aws-monitor
 The log level and aws_acces_key_id may also be passed via command line. If both command line and environment variable are provided, the command line parameter is used. The default log level is INFO:
 
 ```
-envdir /etc/aws-monitor/env aws-monitor -k AWS_ACCESS_KEY_ID -l LOG_LEVEL
+envdir /etc/aws-monitor/env aws-monitor -k AWS_ACCESS_KEY_ID -l LOGLEVEL
 or
-envdir /etc/aws-monitor/env aws-monitor --aws-access-key-id=AWS_ACCESS_KEY_ID  --log-level=LOG_LEVEL
+envdir /etc/aws-monitor/env aws-monitor --aws-access-key-id=AWS_ACCESS_KEY_ID  --loglevel=LOGLEVEL
 ```
 
 
