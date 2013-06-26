@@ -15,7 +15,7 @@ def read(fname):
 os.system("pip install -r requirements.txt")
 
 setup(
-    name="aws_monitor",
+    name="aws-monitor",
     version="0.0.1",
     author="Micah Hausler",
     author_email="micah.hausler@akimbo.io",
@@ -24,7 +24,6 @@ setup(
     license="Closed",
     keywords="AWS",
     url="http://getfireplug.com",
-    packages=['aws_monitor'],
     long_description=read('README.md'),
     dependency_links = [],
     install_requires=[
@@ -37,5 +36,6 @@ setup(
         "Topic :: System :: Monitoring",
         "License :: OSI Approved :: Closed",
     ],
-    entry_points={'console_scripts': ['aws_monitor=monitor.push:main']}
+    package_data={'aws-monitor': ['VERSION']},
+    entry_points={'console_scripts': ['aws-monitor=aws-monitor.push:main']}
 )
